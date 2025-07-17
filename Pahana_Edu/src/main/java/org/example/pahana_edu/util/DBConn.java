@@ -1,4 +1,4 @@
-package org.example.pahana_edu;
+package org.example.pahana_edu.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
