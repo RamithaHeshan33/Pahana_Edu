@@ -43,43 +43,6 @@
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <!-- Welcome Section -->
-      <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-8 text-white mb-8">
-        <div class="flex items-center justify-between">
-          <div>
-            <h2 class="text-3xl font-bold mb-2">Welcome back, <%= user.getFirstName() %>!</h2>
-            <p class="text-indigo-100">Ready to continue your learning journey?</p>
-          </div>
-          <div class="hidden md:block">
-            <i class="fas fa-rocket text-6xl text-indigo-200"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- User Info Card -->
-      <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">
-          <i class="fas fa-user mr-2 text-indigo-600"></i>Profile Information
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-500">Full Name</label>
-              <p class="text-lg text-gray-900"><%= user.getFirstName() %> <%= user.getLastName() %></p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-500">Username</label>
-              <p class="text-lg text-gray-900">@<%= user.getUsername() %></p>
-            </div>
-          </div>
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-500">Email Address</label>
-              <p class="text-lg text-gray-900"><%= user.getEmail() %></p>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Quick Actions -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

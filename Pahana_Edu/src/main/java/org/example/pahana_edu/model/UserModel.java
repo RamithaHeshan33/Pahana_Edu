@@ -1,7 +1,5 @@
 package org.example.pahana_edu.model;
 
-import java.time.LocalDateTime;
-
 public class UserModel {
     private Integer id;
     private String username;

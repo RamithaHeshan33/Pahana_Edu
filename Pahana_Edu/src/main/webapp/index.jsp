@@ -59,7 +59,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white py-12">
+<footer class="bg-gray-900 text-white py-12 mt-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2025 Pahana Edu. | All rights reserved.</p>
