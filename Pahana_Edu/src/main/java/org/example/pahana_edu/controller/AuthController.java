@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.example.pahana_edu.dao.UserDAO;
 import org.example.pahana_edu.dto.UserLoginDTO;
 import org.example.pahana_edu.dto.UserRegistrationDTO;
 import org.example.pahana_edu.dto.UserResponseDTO;
@@ -21,7 +22,7 @@ public class AuthController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        userService = new UserService(new UserDAO());
     }
 
     @Override

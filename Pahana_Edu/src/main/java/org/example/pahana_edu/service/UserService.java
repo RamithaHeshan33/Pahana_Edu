@@ -7,6 +7,7 @@ import org.example.pahana_edu.dto.UserResponseDTO;
 import org.example.pahana_edu.mapper.UserMapper;
 import org.example.pahana_edu.model.UserModel;
 import org.example.pahana_edu.util.PasswordUtil;
+import org.example.pahana_edu.service.EmailService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,8 +17,8 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserDAO userDAO;
 
-    public UserService() {
-        this.userDAO = new UserDAO();
+    public UserService(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public UserResponseDTO registerUser(UserRegistrationDTO registrationDTO) throws SQLException {
@@ -46,6 +47,13 @@ public class UserService {
         // Save user
         UserModel savedUser = userDAO.save(user);
 
+        // Send welcome email asynchronously
+        EmailService.sendWelcomeEmailAsync(
+                savedUser.getEmail(),
+                savedUser.getFirstName(),
+                savedUser.getLastName()
+        );
+
         // Convert to response DTO
         return UserMapper.toResponseDTO(savedUser);
     }
@@ -72,26 +80,6 @@ public class UserService {
 
         // Convert to response DTO
         return UserMapper.toResponseDTO(user);
-    }
-
-    public UserResponseDTO getUserById(Long id) throws SQLException {
-        Optional<UserModel> userOptional = userDAO.findById(id);
-
-        if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
-        }
-
-        return UserMapper.toResponseDTO(userOptional.get());
-    }
-
-    public UserResponseDTO getUserByUsername(String username) throws SQLException {
-        Optional<UserModel> userOptional = userDAO.findByUsername(username);
-
-        if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
-        }
-
-        return UserMapper.toResponseDTO(userOptional.get());
     }
 
     public List<UserResponseDTO> getAllUsers() throws SQLException {
