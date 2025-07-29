@@ -1,4 +1,4 @@
-package org.example.pahana_edu.controller;
+package org.example.pahana_edu.business.book.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

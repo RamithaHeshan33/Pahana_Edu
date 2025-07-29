@@ -1,6 +1,6 @@
-package org.example.pahana_edu.dao;
+package org.example.pahana_edu.persistance.user.dao;
 
-import org.example.pahana_edu.model.UserModel;
+import org.example.pahana_edu.persistance.user.model.UserModel;
 import org.example.pahana_edu.util.DBConn;
 
 import java.sql.*;

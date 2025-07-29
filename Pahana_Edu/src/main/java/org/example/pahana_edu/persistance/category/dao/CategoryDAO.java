@@ -1,6 +1,6 @@
-package org.example.pahana_edu.dao;
+package org.example.pahana_edu.persistance.category.dao;
 
-import org.example.pahana_edu.model.CategoryModel;
+import org.example.pahana_edu.persistance.category.model.CategoryModel;
 import org.example.pahana_edu.util.DBConn;
 
 import java.sql.*;

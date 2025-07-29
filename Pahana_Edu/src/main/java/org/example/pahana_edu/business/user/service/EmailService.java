@@ -1,4 +1,4 @@
-package org.example.pahana_edu.service;
+package org.example.pahana_edu.business.user.service;
 
 import org.example.pahana_edu.util.EmailUtil;
 import java.util.concurrent.CompletableFuture;

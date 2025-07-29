@@ -1,12 +1,12 @@
-package org.example.pahana_edu.service;
+package org.example.pahana_edu.business.category.service;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.pahana_edu.dao.CategoryDAO;
-import org.example.pahana_edu.dto.CategoryDTO;
-import org.example.pahana_edu.mapper.CategoryMapper;
-import org.example.pahana_edu.model.CategoryModel;
+import org.example.pahana_edu.persistance.category.dao.CategoryDAO;
+import org.example.pahana_edu.business.category.dto.CategoryDTO;
+import org.example.pahana_edu.business.category.mapper.CategoryMapper;
+import org.example.pahana_edu.persistance.category.model.CategoryModel;
 
 import java.io.IOException;
 import java.sql.SQLException;

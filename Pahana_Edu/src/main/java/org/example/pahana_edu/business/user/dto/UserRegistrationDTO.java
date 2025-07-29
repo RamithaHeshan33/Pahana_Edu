@@ -1,4 +1,4 @@
-package org.example.pahana_edu.dto;
+package org.example.pahana_edu.business.user.dto;
 
 public class UserRegistrationDTO {
     private String username;

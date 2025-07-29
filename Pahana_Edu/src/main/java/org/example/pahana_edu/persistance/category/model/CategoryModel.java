@@ -1,4 +1,4 @@
-package org.example.pahana_edu.model;
+package org.example.pahana_edu.persistance.category.model;
 
 public class CategoryModel {
     private Integer id;

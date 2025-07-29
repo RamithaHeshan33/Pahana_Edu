@@ -1,4 +1,4 @@
-package org.example.pahana_edu.controller;
+package org.example.pahana_edu.business.user.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,11 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.example.pahana_edu.dao.UserDAO;
-import org.example.pahana_edu.dto.UserLoginDTO;
-import org.example.pahana_edu.dto.UserRegistrationDTO;
-import org.example.pahana_edu.dto.UserResponseDTO;
-import org.example.pahana_edu.service.UserService;
+import org.example.pahana_edu.persistance.user.dao.UserDAO;
+import org.example.pahana_edu.business.user.dto.UserLoginDTO;
+import org.example.pahana_edu.business.user.dto.UserRegistrationDTO;
+import org.example.pahana_edu.business.user.dto.UserResponseDTO;
+import org.example.pahana_edu.business.user.service.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;

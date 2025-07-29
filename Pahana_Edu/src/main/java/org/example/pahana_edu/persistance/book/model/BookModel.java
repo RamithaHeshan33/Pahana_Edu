@@ -1,4 +1,4 @@
-package org.example.pahana_edu.model;
+package org.example.pahana_edu.persistance.book.model;
 
 import java.time.LocalDateTime;
 

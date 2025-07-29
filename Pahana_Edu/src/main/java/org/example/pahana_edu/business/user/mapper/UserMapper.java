@@ -1,8 +1,8 @@
-package org.example.pahana_edu.mapper;
+package org.example.pahana_edu.business.user.mapper;
 
-import org.example.pahana_edu.dto.UserRegistrationDTO;
-import org.example.pahana_edu.dto.UserResponseDTO;
-import org.example.pahana_edu.model.UserModel;
+import org.example.pahana_edu.business.user.dto.UserRegistrationDTO;
+import org.example.pahana_edu.business.user.dto.UserResponseDTO;
+import org.example.pahana_edu.persistance.user.model.UserModel;
 
 public class UserMapper {
 

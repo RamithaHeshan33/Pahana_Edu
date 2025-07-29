@@ -1,4 +1,4 @@
-package org.example.pahana_edu.dto;
+package org.example.pahana_edu.business.category.dto;
 
 public class CategoryDTO {
     private Integer id; // Add id field

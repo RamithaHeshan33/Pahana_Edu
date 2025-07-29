@@ -1,7 +1,7 @@
-package org.example.pahana_edu.mapper;
+package org.example.pahana_edu.business.category.mapper;
 
-import org.example.pahana_edu.dto.CategoryDTO;
-import org.example.pahana_edu.model.CategoryModel;
+import org.example.pahana_edu.business.category.dto.CategoryDTO;
+import org.example.pahana_edu.persistance.category.model.CategoryModel;
 
 public class CategoryMapper {
     public static CategoryModel toEntity(CategoryDTO categoryDTO) {

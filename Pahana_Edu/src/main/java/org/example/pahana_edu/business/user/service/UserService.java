@@ -1,13 +1,12 @@
-package org.example.pahana_edu.service;
+package org.example.pahana_edu.business.user.service;
 
-import org.example.pahana_edu.dao.UserDAO;
-import org.example.pahana_edu.dto.UserLoginDTO;
-import org.example.pahana_edu.dto.UserRegistrationDTO;
-import org.example.pahana_edu.dto.UserResponseDTO;
-import org.example.pahana_edu.mapper.UserMapper;
-import org.example.pahana_edu.model.UserModel;
+import org.example.pahana_edu.persistance.user.dao.UserDAO;
+import org.example.pahana_edu.business.user.dto.UserLoginDTO;
+import org.example.pahana_edu.business.user.dto.UserRegistrationDTO;
+import org.example.pahana_edu.business.user.dto.UserResponseDTO;
+import org.example.pahana_edu.business.user.mapper.UserMapper;
+import org.example.pahana_edu.persistance.user.model.UserModel;
 import org.example.pahana_edu.util.PasswordUtil;
-import org.example.pahana_edu.service.EmailService;
 
 import java.sql.SQLException;
 import java.util.List;
