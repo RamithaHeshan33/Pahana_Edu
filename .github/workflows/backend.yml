@@ -1,33 +1,183 @@
-name: Backend CI
+# name: Backend CI/CD
 
-on:
-  push:
-    paths:
-      - "backend/**"
-  pull_request:
-    paths:
-      - "backend/**"
+# on:
+#   push:
+#     branches: [ main, dev ]
+#     paths:
+#       - "src/**"
+#       - "pom.xml"
+#       - ".github/workflows/backend.yml"
+#   pull_request:
+#     branches: [ main, develop ]
+#     paths:
+#       - "src/**"
+#       - "pom.xml"
+#       - ".github/workflows/backend.yml"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     name: Test Backend
 
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_ROOT_PASSWORD: root
+#           MYSQL_DATABASE: pahana_edu_test
+#         ports:
+#           - 3306:3306
+#         options: >-
+#           --health-cmd="mysqladmin ping"
+#           --health-interval=10s
+#           --health-timeout=5s
+#           --health-retries=3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: "17"
-          distribution: "temurin"
-          cache: maven
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Build with Maven
-        run: |
-          cd backend
-          ./mvnw clean install
+#       - name: Set up JDK 21
+#         uses: actions/setup-java@v4
+#         with:
+#           java-version: '21'
+#           distribution: 'temurin'
+#           cache: maven
 
-      # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-      - name: Update dependency graph
-        uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+#       - name: Wait for MySQL
+#         run: |
+#           while ! mysqladmin ping -h"127.0.0.1" -P3306 -uroot -proot --silent; do
+#             echo "Waiting for MySQL..."
+#             sleep 2
+#           done
+
+#       - name: Setup test database
+#         run: |
+#           mysql -h127.0.0.1 -P3306 -uroot -proot -e "
+#             CREATE DATABASE IF NOT EXISTS pahana_edu_test;
+#             USE pahana_edu_test;
+#             CREATE TABLE IF NOT EXISTS users (
+#               id BIGINT AUTO_INCREMENT PRIMARY KEY,
+#               username VARCHAR(50) NOT NULL UNIQUE,
+#               email VARCHAR(100) NOT NULL UNIQUE,
+#               password VARCHAR(255) NOT NULL,
+#               first_name VARCHAR(50) NOT NULL,
+#               last_name VARCHAR(50) NOT NULL,
+#               created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+#               updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+#               active BOOLEAN DEFAULT TRUE,
+#               INDEX idx_username (username),
+#               INDEX idx_email (email),
+#               INDEX idx_active (active),
+#               INDEX idx_created_at (created_at)
+#             );
+#           "
+
+#       - name: Run tests
+#         run: mvn clean test
+#         env:
+#           DB_URL: jdbc:mysql://127.0.0.1:3306/pahana_edu_test
+#           DB_USERNAME: root
+#           DB_PASSWORD: ''
+
+#       # - name: Generate test report
+#       #   uses: dorny/test-reporter@v1
+#       #   if: success() || failure()
+#       #   with:
+#       #     name: Maven Tests
+#       #     path: target/surefire-reports/*.xml
+#       #     reporter: java-junit
+
+#   build:
+#     runs-on: ubuntu-latest
+#     name: Build Backend
+#     needs: test
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Set up JDK 21
+#         uses: actions/setup-java@v4
+#         with:
+#           java-version: '21'
+#           distribution: 'temurin'
+#           cache: maven
+
+#       - name: Build with Maven
+#         run: mvn clean compile
+
+#       - name: Package application
+#         run: mvn package -DskipTests
+
+#       - name: Upload build artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: war-artifact
+#           path: target/*.war
+#           retention-days: 30
+
+#   security-scan:
+#     runs-on: ubuntu-latest
+#     name: Security Scan
+#     needs: build
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Set up JDK 21
+#         uses: actions/setup-java@v4
+#         with:
+#           java-version: '21'
+#           distribution: 'temurin'
+#           cache: maven
+
+#       - name: Run OWASP Dependency Check
+#         run: mvn org.owasp:dependency-check-maven:check
+#         continue-on-error: true
+
+#       - name: Upload security report
+#         uses: actions/upload-artifact@v4
+#         if: always()
+#         with:
+#           name: security-report
+#           path: target/dependency-check-report.html
+#           retention-days: 30
+
+#   code-quality:
+#     runs-on: ubuntu-latest
+#     name: Code Quality Analysis
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Set up JDK 21
+#         uses: actions/setup-java@v4
+#         with:
+#           java-version: '21'
+#           distribution: 'temurin'
+#           cache: maven
+
+#       - name: Cache SonarCloud packages
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.sonar/cache
+#           key: ${{ runner.os }}-sonar
+#           restore-keys: ${{ runner.os }}-sonar
+
+#       - name: Build and analyze
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         run: |
+#           if [ -n "$SONAR_TOKEN" ]; then
+#             mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+#               -Dsonar.projectKey=pahana-edu \
+#               -Dsonar.organization=your-org \
+#               -Dsonar.host.url=https://sonarcloud.io
+#           else
+#             echo "SONAR_TOKEN not set, skipping SonarCloud analysis"
+#             mvn clean verify
+#           fi
