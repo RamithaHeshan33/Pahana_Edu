@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="org.example.pahana_edu.dto.UserRegistrationDTO" %>
+<%@ page import="org.example.pahana_edu.business.user.dto.UserRegistrationDTO" %>
 <%
     UserRegistrationDTO registrationData = (UserRegistrationDTO) request.getAttribute("registrationData");
 %>
