@@ -1,8 +1,8 @@
-package org.example.pahana_edu.persistance.book.model;
+package org.example.pahana_edu.business.book.dto;
 
 import java.time.LocalDateTime;
 
-public class BookModel {
+public class BookDTO {
     private Integer id;
     private String title;
     private String author;
@@ -10,32 +10,55 @@ public class BookModel {
     private String isbn;
     private Integer quantity;
     private Double price;
-    private String description;
-    private String category;
+    private String categoryId;
+    private String categoryName;
     private String image;
     private String language;
+    private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Constructor
-    public BookModel(Double price, Integer id, String title, String author, String publisher, String isbn, Integer quantity,
-                     String description, String category, String image, String language, LocalDateTime createdAt,
-                     LocalDateTime updatedAt) {
+    // Default constructor
+    public BookDTO() {}
+
+    // Constructor for creating new book
+    public BookDTO(String title, String author, String publisher, String isbn,
+                   Integer quantity, Double price, String categoryId, String image,
+                   String language, String description) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.quantity = quantity;
         this.price = price;
+        this.categoryId = categoryId;
+        this.image = image;
+        this.language = language;
+        this.description = description;
+    }
+
+    // Constructor with all fields
+    public BookDTO(Integer id, String title, String author, String publisher, String isbn,
+                   Integer quantity, Double price, String categoryId, String categoryName,
+                   String image, String language, String description,
+                   LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.isbn = isbn;
         this.quantity = quantity;
-        this.description = description;
-        this.category = category;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.image = image;
         this.language = language;
+        this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -92,20 +115,20 @@ public class BookModel {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getImage() {
@@ -124,6 +147,14 @@ public class BookModel {
         this.language = language;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -138,5 +169,13 @@ public class BookModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    // Validation method
+    public boolean isValid() {
+        return title != null && !title.trim().isEmpty() &&
+                quantity != null && quantity >= 0 &&
+                price != null && price >= 0 &&
+                categoryId != null && !categoryId.trim().isEmpty();
     }
 }
