@@ -40,7 +40,19 @@ CREATE TABLE IF NOT EXISTS books (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
+-- Create customer table
+CREATE TABLE IF NOT EXISTS customers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(20),
+    address VARCHAR(255),
+    account_number VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Show table structure
 DESCRIBE admins;
 DESCRIBE categories;
 DESCRIBE books;
+DESCRIBE customers;
