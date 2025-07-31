@@ -123,4 +123,27 @@ public class CustomerDAO {
             throw new SQLException("Error deleting customer: " + e.getMessage(), e);
         }
     }
+
+    public CustomerModel findByPhone(String phone) throws SQLException {
+        String sql = "SELECT * FROM customers WHERE phone = ?";
+
+        try (Connection connection = DBConn.getInstance().getConnection(); PreparedStatement stmt = connection.prepareStatement(sql)) { stmt.setString(1, phone);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    CustomerModel customer = new CustomerModel(
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("address"),
+                            rs.getString("account_number")
+                    );
+                    customer.setCustomerId(rs.getInt("id"));
+                    return customer;
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error finding customer by phone: " + e.getMessage(), e);
+        }
+        return null;
+    }
 }
