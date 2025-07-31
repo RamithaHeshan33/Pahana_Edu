@@ -31,10 +31,10 @@
         <i class="fas fa-circle-user mr-3"></i>
         Customers
       </a>
-      <a href="${pageContext.request.contextPath}/transactions"
+      <a href="${pageContext.request.contextPath}/orders/ManageOrders"
          class="flex items-center px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition duration-200">
-        <i class="fas fa-dollar-sign mr-3"></i>
-        Transactions
+        <i class="fas fa-receipt mr-3"></i>
+        Orders
       </a>
     </nav>
 

@@ -729,7 +729,7 @@
 
         showNotification('Customer verified successfully!', 'success');
       } else {
-        alert('Customer not found: ' + data.message);
+        showNotification('There is no registered customer with this number', 'error');
       }
     })
     .catch(error => {
