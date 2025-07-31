@@ -11,18 +11,28 @@ import org.example.pahana_edu.business.user.dto.UserLoginDTO;
 import org.example.pahana_edu.business.user.dto.UserRegistrationDTO;
 import org.example.pahana_edu.business.user.dto.UserResponseDTO;
 import org.example.pahana_edu.business.user.service.UserService;
+import org.example.pahana_edu.business.book.dto.BookDTO;
+import org.example.pahana_edu.business.book.service.BookService;
+import org.example.pahana_edu.business.category.dto.CategoryDTO;
+import org.example.pahana_edu.business.category.service.CategoryService;
+import org.example.pahana_edu.persistance.category.dao.CategoryDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "authController", urlPatterns = {"/auth/*"})
 public class AuthController extends HttpServlet {
 
     private UserService userService;
+    private BookService bookService;
+    private CategoryService categoryService;
 
     @Override
     public void init() throws ServletException {
         userService = new UserService(new UserDAO());
+        bookService = new BookService();
+        categoryService = new CategoryService(new CategoryDAO());
     }
 
     @Override
@@ -156,6 +166,19 @@ public class AuthController extends HttpServlet {
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect(request.getContextPath() + "/auth/login");
             return;
+        }
+
+        try {
+            // Get all books for display
+            List<BookDTO> books = bookService.getAllBooks();
+            request.setAttribute("books", books);
+
+            // Get all categories for search filter
+            List<CategoryDTO> categories = categoryService.getAllCategories();
+            request.setAttribute("categories", categories);
+
+        } catch (SQLException e) {
+            request.setAttribute("error", "Error loading dashboard data: " + e.getMessage());
         }
 
         request.getRequestDispatcher("/Admin/dashboard.jsp").forward(request, response);
