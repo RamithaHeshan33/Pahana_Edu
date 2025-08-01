@@ -330,14 +330,22 @@
 
 <!-- Order Success Modal -->
 <div id="orderSuccessModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
-  <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+  <div class="relative top-10 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white">
     <div class="mt-3 text-center">
       <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
         <i class="fas fa-check text-green-600 text-xl"></i>
       </div>
       <h3 class="text-lg font-medium text-gray-900 mb-4">Order Completed Successfully!</h3>
 
-      <div class="bg-gray-50 rounded-lg p-4 mb-4 text-left">
+      <div id="orderReceiptContent" class="bg-gray-50 rounded-lg p-4 mb-4 text-left">
+        <!-- Order Header -->
+        <div class="text-center mb-4 pb-4 border-b border-gray-300">
+          <h2 class="text-xl font-bold text-gray-900">Pahana Edu Bookshop</h2>
+          <p class="text-sm text-gray-600">Order Receipt</p>
+          <p class="text-xs text-gray-500" id="receiptDate"></p>
+        </div>
+
+        <!-- Order Information -->
         <div class="space-y-2 text-sm">
           <div class="flex justify-between">
             <span class="font-medium">Order ID:</span>
@@ -347,25 +355,51 @@
             <span class="font-medium">Customer:</span>
             <span id="successCustomerName"></span>
           </div>
-          <div class="flex justify-between">
-            <span class="font-medium">Total Amount:</span>
-            <span id="successTotalAmount" class="text-green-600 font-bold"></span>
+        </div>
+
+        <!-- Order Items -->
+        <div class="mt-4">
+          <h4 class="font-medium text-gray-900 mb-2 pb-2 border-b border-gray-300">Order Items:</h4>
+          <div id="successOrderItems" class="space-y-2">
+            <!-- Order items will be populated here -->
           </div>
-          <div class="flex justify-between">
-            <span class="font-medium">Cash Received:</span>
-            <span id="successCashReceived"></span>
+        </div>
+
+        <!-- Payment Summary -->
+        <div class="mt-4 pt-4 border-t border-gray-300">
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="font-medium">Total Amount:</span>
+              <span id="successTotalAmount" class="text-green-600 font-bold"></span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium">Cash Received:</span>
+              <span id="successCashReceived"></span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium">Change:</span>
+              <span id="successChangeAmount" class="text-blue-600 font-bold"></span>
+            </div>
           </div>
-          <div class="flex justify-between">
-            <span class="font-medium">Change:</span>
-            <span id="successChangeAmount" class="text-blue-600 font-bold"></span>
-          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-4 pt-4 border-t border-gray-300">
+          <p class="text-xs text-gray-500">Thank you for purchasing!</p>
+          <p class="text-xs text-gray-500">Visit us again soon.</p>
         </div>
       </div>
 
-      <button onclick="closeOrderSuccessModal()"
-              class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        <i class="fas fa-check mr-2"></i>OK
-      </button>
+      <div class="flex space-x-3">
+        <button onclick="printReceipt()"
+                class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+          <i class="fas fa-print mr-2"></i>Print Receipt
+        </button>
+        <button onclick="closeOrderSuccessModal()"
+                class="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <i class="fas fa-check mr-2"></i>OK
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -714,33 +748,33 @@
       },
       body: 'phone=' + encodeURIComponent(phone)
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        // Customer found, show customer info and payment section
-        document.getElementById('customerName').textContent = data.data.name;
-        document.getElementById('customerPhoneDisplay').textContent = data.data.phone;
-        document.getElementById('customerInfo').classList.remove('hidden');
-        document.getElementById('paymentSection').classList.remove('hidden');
-        document.getElementById('processBtn').disabled = false;
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Customer found, show customer info and payment section
+                document.getElementById('customerName').textContent = data.data.name;
+                document.getElementById('customerPhoneDisplay').textContent = data.data.phone;
+                document.getElementById('customerInfo').classList.remove('hidden');
+                document.getElementById('paymentSection').classList.remove('hidden');
+                document.getElementById('processBtn').disabled = false;
 
-        // Focus on cash received input
-        document.getElementById('cashReceived').focus();
+                // Focus on cash received input
+                document.getElementById('cashReceived').focus();
 
-        showNotification('Customer verified successfully!', 'success');
-      } else {
-        showNotification('There is no registered customer with this number', 'error');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Error verifying customer. Please try again.');
-    })
-    .finally(() => {
-      // Reset button state
-      verifyBtn.innerHTML = originalText;
-      verifyBtn.disabled = false;
-    });
+                showNotification('Customer verified successfully!', 'success');
+              } else {
+                showNotification('There is no registered customer with this number', 'error');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Error verifying customer. Please try again.');
+            })
+            .finally(() => {
+              // Reset button state
+              verifyBtn.innerHTML = originalText;
+              verifyBtn.disabled = false;
+            });
   }
 
   function calculateChange() {
@@ -827,11 +861,125 @@
     document.getElementById('successCashReceived').textContent = 'Rs. ' + orderData.cashReceived.toFixed(2);
     document.getElementById('successChangeAmount').textContent = 'Rs. ' + orderData.changeAmount.toFixed(2);
 
+    // Update receipt date
+    const now = new Date();
+    document.getElementById('receiptDate').textContent = now.toLocaleString();
+
+    // Update order items
+    const orderItemsContainer = document.getElementById('successOrderItems');
+    let itemsHtml = '';
+
+    if (cart && cart.length > 0) {
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        itemsHtml += '<div class="flex justify-between items-center py-1 text-sm">' +
+                '<div class="flex-1">' +
+                '<span class="font-medium">' + item.title + '</span>' +
+                '<div class="text-xs text-gray-500">Rs. ' + item.price.toFixed(2) + ' × ' + item.quantity + '</div>' +
+                '</div>' +
+                '<span class="font-medium">Rs. ' + itemTotal.toFixed(2) + '</span>' +
+                '</div>';
+      });
+    }
+
+    orderItemsContainer.innerHTML = itemsHtml;
+
     modal.classList.remove('hidden');
   }
 
   function closeOrderSuccessModal() {
     document.getElementById('orderSuccessModal').classList.add('hidden');
+  }
+
+  function printReceipt() {
+    // Get the receipt content
+    const receiptContent = document.getElementById('orderReceiptContent');
+
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank', 'width=800,height=600');
+
+    // Write the document structure first
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Order Receipt - Pahana Edu</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+            line-height: 1.4;
+          }
+          .receipt-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+          }
+          .text-center { text-align: center; }
+          .text-left { text-align: left; }
+          .text-xl { font-size: 1.25rem; }
+          .text-lg { font-size: 1.125rem; }
+          .text-sm { font-size: 0.875rem; }
+          .text-xs { font-size: 0.75rem; }
+          .font-bold { font-weight: bold; }
+          .font-medium { font-weight: 500; }
+          .text-gray-900 { color: #111827; }
+          .text-gray-600 { color: #4b5563; }
+          .text-gray-500 { color: #6b7280; }
+          .text-green-600 { color: #059669; }
+          .text-blue-600 { color: #2563eb; }
+          .mb-2 { margin-bottom: 0.5rem; }
+          .mb-4 { margin-bottom: 1rem; }
+          .mt-4 { margin-top: 1rem; }
+          .pb-2 { padding-bottom: 0.5rem; }
+          .pb-4 { padding-bottom: 1rem; }
+          .pt-4 { padding-top: 1rem; }
+          .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+          .space-y-2 > * + * { margin-top: 0.5rem; }
+          .border-b { border-bottom: 1px solid #d1d5db; }
+          .border-t { border-top: 1px solid #d1d5db; }
+          .border-gray-300 { border-color: #d1d5db; }
+          .flex { display: flex; }
+          .justify-between { justify-content: space-between; }
+          .items-center { align-items: center; }
+          .flex-1 { flex: 1; }
+          @media print {
+            body { margin: 0; }
+            .receipt-container {
+              border: none !important;
+              box-shadow: none !important;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="receipt-container">
+    `);
+
+    // Add the receipt content
+    printWindow.document.write(receiptContent.innerHTML);
+
+    // Close the container and document
+    printWindow.document.write(`
+        </div>
+      </body>
+      </html>
+    `);
+
+    printWindow.document.close();
+
+    // Wait for content to load then print
+    setTimeout(() => {
+      printWindow.focus();
+      printWindow.print();
+
+      // Close the print window after printing
+      setTimeout(() => {
+        printWindow.close();
+      }, 1000);
+    }, 500);
   }
 
   function showNotification(message, type) {
