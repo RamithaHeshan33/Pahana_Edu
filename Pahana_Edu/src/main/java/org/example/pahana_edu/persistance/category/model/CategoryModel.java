@@ -10,8 +10,6 @@ public class CategoryModel {
         this.categoryDescription = categoryDescription;
     }
 
-    public CategoryModel() {}
-
     public Integer getId() {
         return id;
     }
