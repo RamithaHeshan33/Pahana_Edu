@@ -17,8 +17,6 @@ public class CustomerModel {
         this.customerAccountNumber = customerAccountNumber;
     }
 
-    public CustomerModel() {}
-
     public Integer getCustomerId() {
         return customerId;
     }
