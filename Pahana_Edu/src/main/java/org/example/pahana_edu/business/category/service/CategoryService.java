@@ -21,14 +21,14 @@ public class CategoryService {
     }
 
     public List<CategoryDTO> getAllCategories() throws SQLException {
-        List<CategoryModel> categories = CategoryDAO.getAllCategories();
+        List<CategoryModel> categories = categoryDAO.getAllCategories();
         return categories.stream()
                 .map(CategoryMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     public CategoryDTO getCategoryById(int id) throws SQLException {
-        CategoryModel category = CategoryDAO.getCategoryById(id);
+        CategoryModel category = categoryDAO.getCategoryById(id);
         return category != null ? CategoryMapper.toDTO(category) : null;
     }
 
@@ -113,7 +113,7 @@ public class CategoryService {
             category.setId(categoryId);
 
             // Update in database
-            CategoryModel updatedCategory = CategoryDAO.updateCategory(category);
+            CategoryModel updatedCategory = categoryDAO.updateCategory(category);
 
             // Set success message in session
             request.getSession().setAttribute("success", "Category '" + updatedCategory.getCategoryName() + "' has been updated successfully!");
@@ -132,8 +132,8 @@ public class CategoryService {
     }
 
     public boolean deleteCategory(int id, HttpServletRequest request) throws SQLException {
-        boolean deleted = CategoryDAO.deleteCategory(id);
-        if (deleted) {
+        boolean deleted = categoryDAO.deleteCategory(id);
+        if (deleted && request != null) {
             request.getSession().setAttribute("success", "Category has been deleted successfully!");
         }
         return deleted;
