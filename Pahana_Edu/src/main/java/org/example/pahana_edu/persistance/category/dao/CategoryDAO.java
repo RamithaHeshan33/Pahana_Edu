@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
-    public static CategoryModel saveCategory(CategoryModel category) throws SQLException {
+    public CategoryModel saveCategory(CategoryModel category) throws SQLException {
         String sql = "INSERT INTO categories (name, description) VALUES (?, ?)";
         try (Connection connection = DBConn.getInstance().getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -36,7 +36,7 @@ public class CategoryDAO {
         return category;
     }
 
-    public static CategoryModel getCategoryById(int id) throws SQLException {
+    public CategoryModel getCategoryById(int id) throws SQLException {
         String sql = "SELECT * FROM categories WHERE id = ?";
         try (Connection connection = DBConn.getInstance().getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -55,7 +55,7 @@ public class CategoryDAO {
         return null;
     }
 
-    public static List<CategoryModel> getAllCategories() throws SQLException {
+    public List<CategoryModel> getAllCategories() throws SQLException {
         String sql = "SELECT * FROM categories ORDER BY name";
         List<CategoryModel> categories = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class CategoryDAO {
         return categories;
     }
 
-    public static CategoryModel updateCategory(CategoryModel category) throws SQLException {
+    public CategoryModel updateCategory(CategoryModel category) throws SQLException {
         String sql = "UPDATE categories SET name = ?, description = ? WHERE id = ?";
         try (Connection connection = DBConn.getInstance().getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -94,7 +94,7 @@ public class CategoryDAO {
         return category;
     }
 
-    public static boolean deleteCategory(int id) throws SQLException {
+    public boolean deleteCategory(int id) throws SQLException {
         String sql = "DELETE FROM categories WHERE id = ?";
         try (Connection connection = DBConn.getInstance().getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
