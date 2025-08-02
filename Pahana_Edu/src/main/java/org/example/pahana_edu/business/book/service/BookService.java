@@ -24,6 +24,10 @@ public class BookService {
         this.bookDAO = new BookDAO();
     }
 
+    public BookService(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
+
     public List<BookDTO> getAllBooks() throws SQLException {
         List<BookModel> books = bookDAO.getAllBooks();
         return books.stream()
@@ -343,7 +347,7 @@ public class BookService {
 
     public boolean deleteBook(int id, HttpServletRequest request) throws SQLException {
         boolean deleted = bookDAO.deleteBook(id);
-        if (deleted) {
+        if (deleted && request != null) {
             request.getSession().setAttribute("success", "Book has been deleted successfully!");
         }
         return deleted;
