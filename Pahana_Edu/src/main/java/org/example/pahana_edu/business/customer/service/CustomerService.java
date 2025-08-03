@@ -133,7 +133,7 @@ public class CustomerService {
 
     public boolean deleteCustomer(int id, HttpServletRequest request) throws SQLException {
         boolean deleted = customerDAO.deleteCustomer(id);
-        if (deleted) {
+        if (deleted && request != null) {
             request.getSession().setAttribute("success", "Customer has been deleted successfully!");
         }
         return deleted;
