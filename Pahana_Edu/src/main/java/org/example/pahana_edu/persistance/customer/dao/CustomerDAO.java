@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO {
-    public static CustomerModel saveCustomer(CustomerModel customer) throws SQLException {
+    public CustomerModel saveCustomer(CustomerModel customer) throws SQLException {
         String sql = "INSERT INTO customers (name, email, phone, address, account_number) VALUES (?,?,?,?,?)";
         try {
             Connection connection = DBConn.getInstance().getConnection();
