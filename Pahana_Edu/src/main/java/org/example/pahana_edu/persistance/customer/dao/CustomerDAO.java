@@ -146,4 +146,44 @@ public class CustomerDAO {
         }
         return null;
     }
+
+    public boolean existingCustomerByEmail(String customerEmail) throws SQLException {
+        String sql = "SELECT * FROM customers WHERE email = ?";
+
+        try (Connection connection = DBConn.getInstance().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, customerEmail);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    public boolean existingCustomerByPhone(String customerPhone) throws SQLException {
+        String sql = "SELECT * FROM customers WHERE phone = ?";
+        try (Connection connection = DBConn.getInstance().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, customerPhone);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    public boolean existingCustomerByAccountNumber(String customerAccountNumber) throws SQLException {
+        String sql = "SELECT * FROM customers WHERE account_number = ?";
+        try (Connection connection = DBConn.getInstance().getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, customerAccountNumber);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
 }

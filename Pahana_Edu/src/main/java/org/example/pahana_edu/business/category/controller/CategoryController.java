@@ -142,7 +142,7 @@ public class CategoryController extends HttpServlet {
             request.setAttribute("error", "Invalid category ID");
             handleManageCategories(request, response);
         } catch (SQLException e) {
-            request.setAttribute("error", "Database error occurred while deleting category");
+            request.setAttribute("error", "This category cannot be deleted because it contains books.");
             handleManageCategories(request, response);
         }
     }
