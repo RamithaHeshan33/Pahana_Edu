@@ -42,8 +42,8 @@
             Welcome to <span class="text-indigo-600">Pahana Edu</span>
         </h1>
         <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Your gateway to quality education. Join thousands of learners who are advancing their skills
-            and achieving their goals with our comprehensive learning management system.
+            Manage inventory, customer and category details, and view Order operations with this billing system
+            | Designed exclusively for administrators of Pahana Edu Bookshop.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="${pageContext.request.contextPath}/auth/register"

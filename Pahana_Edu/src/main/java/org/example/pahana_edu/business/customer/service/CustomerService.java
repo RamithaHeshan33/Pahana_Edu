@@ -55,6 +55,24 @@ public class CustomerService {
                 return null;
             }
 
+            if (customerDAO.existingCustomerByEmail(customerEmail)) {
+                request.setAttribute("error", "Email already exists");
+                request.getRequestDispatcher("/Admin/ManageCustomers.jsp").forward(request, response);
+                return null;
+            }
+
+            if (customerDAO.existingCustomerByPhone(customerPhone)) {
+                request.setAttribute("error", "Phone number already exists");
+                request.getRequestDispatcher("/Admin/ManageCustomers.jsp").forward(request, response);
+                return null;
+            }
+
+            if (customerDAO.existingCustomerByAccountNumber(customerAccountNumber)) {
+                request.setAttribute("error", "Account number already exists");
+                request.getRequestDispatcher("/Admin/ManageCustomers.jsp").forward(request, response);
+                return null;
+            }
+
             CustomerModel customer = CustomerMapper.toEntity(dto);
 
             CustomerModel addedCustomer = customerDAO.saveCustomer(customer);

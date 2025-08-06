@@ -10,21 +10,21 @@ public class BookMapper {
             return null;
         }
 
-        return new BookModel(
-                bookDTO.getPrice(),
-                bookDTO.getId(),
-                bookDTO.getTitle(),
-                bookDTO.getAuthor(),
-                bookDTO.getPublisher(),
-                bookDTO.getIsbn(),
-                bookDTO.getQuantity(),
-                bookDTO.getDescription(),
-                bookDTO.getCategoryId(),
-                bookDTO.getImage(),
-                bookDTO.getLanguage(),
-                bookDTO.getCreatedAt(),
-                bookDTO.getUpdatedAt()
-        );
+        return BookModel.builder()
+                .id(bookDTO.getId())
+                .title(bookDTO.getTitle())
+                .author(bookDTO.getAuthor())
+                .publisher(bookDTO.getPublisher())
+                .isbn(bookDTO.getIsbn())
+                .quantity(bookDTO.getQuantity())
+                .price(bookDTO.getPrice())
+                .description(bookDTO.getDescription())
+                .category(bookDTO.getCategoryId())
+                .image(bookDTO.getImage())
+                .language(bookDTO.getLanguage())
+                .createdAt(bookDTO.getCreatedAt())
+                .updatedAt(bookDTO.getUpdatedAt())
+                .build();
     }
 
     public static BookDTO toDTO(BookModel bookModel) {
@@ -32,21 +32,21 @@ public class BookMapper {
             return null;
         }
 
-        return new BookDTO(
-                bookModel.getId(),
-                bookModel.getTitle(),
-                bookModel.getAuthor(),
-                bookModel.getPublisher(),
-                bookModel.getIsbn(),
-                bookModel.getQuantity(),
-                bookModel.getPrice(),
-                null,
-                bookModel.getCategory(),
-                bookModel.getImage(),
-                bookModel.getLanguage(),
-                bookModel.getDescription(),
-                bookModel.getCreatedAt(),
-                bookModel.getUpdatedAt()
-        );
+        return BookDTO.builder()
+                .id(bookModel.getId())
+                .title(bookModel.getTitle())
+                .author(bookModel.getAuthor())
+                .publisher(bookModel.getPublisher())
+                .isbn(bookModel.getIsbn())
+                .quantity(bookModel.getQuantity())
+                .price(bookModel.getPrice())
+                .categoryId(null)
+                .categoryName(bookModel.getCategory())
+                .image(bookModel.getImage())
+                .language(bookModel.getLanguage())
+                .description(bookModel.getDescription())
+                .createdAt(bookModel.getCreatedAt())
+                .updatedAt(bookModel.getUpdatedAt())
+                .build();
     }
 }
