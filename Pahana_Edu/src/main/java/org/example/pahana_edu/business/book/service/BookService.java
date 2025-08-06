@@ -130,8 +130,18 @@ public class BookService {
             }
 
             // Create DTO
-            BookDTO bookDTO = new BookDTO(title, author, publisher, isbn, quantity, price,
-                    categoryId, image, language, description);
+            BookDTO bookDTO = BookDTO.builder()
+                    .title(title)
+                    .author(author)
+                    .publisher(publisher)
+                    .isbn(isbn)
+                    .quantity(quantity)
+                    .price(price)
+                    .categoryId(categoryId)
+                    .image(image)
+                    .language(language)
+                    .description(description)
+                    .build();
 
             // Validate DTO
             if (!bookDTO.isValid()) {
@@ -293,8 +303,22 @@ public class BookService {
             }
 
             // Create DTO
-            BookDTO bookDTO = new BookDTO(bookId, title, author, publisher, isbn, quantity, price,
-                    categoryId, null, image, language, description, null, null);
+            BookDTO bookDTO = BookDTO.builder()
+                    .id(bookId)
+                    .title(title)
+                    .author(author)
+                    .publisher(publisher)
+                    .isbn(isbn)
+                    .quantity(quantity)
+                    .price(price)
+                    .categoryId(categoryId)
+                    .categoryName(null)
+                    .image(image)
+                    .language(language)
+                    .description(description)
+                    .createdAt(null)
+                    .updatedAt(null)
+                    .build();
 
             // Validate DTO
             if (!bookDTO.isValid()) {

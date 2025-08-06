@@ -26,41 +26,41 @@ class BookServiceTest {
         fakeBookDAO = new FakeBookDAO();
         bookService = new BookService(fakeBookDAO);
 
-        bookModel = new BookModel(
-                29.99,
-                1,
-                "Test Book",
-                "Test Author",
-                "Test Publisher",
-                "1234567890",
-                10,
-                "Test Description",
-                "1",
-                "Uploads/test.jpg",
-                "English",
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        bookModel = BookModel.builder()
+                .id(1)
+                .title("Test Book")
+                .author("Test Author")
+                .publisher("Test Publisher")
+                .isbn("1234567890")
+                .quantity(10)
+                .price(29.99)
+                .description("Test Description")
+                .category("1")
+                .image("Uploads/test.jpg")
+                .language("English")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
 
-        expectedBookDTO = new BookDTO(
-                1,
-                "Test Book",
-                "Test Author",
-                "Test Publisher",
-                "1234567890",
-                10,
-                29.99,
-                "1",
-                "1",
-                "Uploads/test.jpg",
-                "English",
-                "Test Description",
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        expectedBookDTO = BookDTO.builder()
+                .id(1)
+                .title("Test Book")
+                .author("Test Author")
+                .publisher("Test Publisher")
+                .isbn("1234567890")
+                .quantity(10)
+                .price(29.99)
+                .categoryId("1")
+                .categoryName("1")
+                .image("Uploads/test.jpg")
+                .language("English")
+                .description("Test Description")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
     }
 
-    // Fake BookDAO implementation for testing
+    // Fake BookDAO implementation for testing //test
     private static class FakeBookDAO extends BookDAO {
         private List<BookModel> books = new ArrayList<>();
         private boolean shouldFail = false;
@@ -194,21 +194,21 @@ class BookServiceTest {
     @Test
     void updateBook_Success() throws SQLException {
         fakeBookDAO.saveBook(bookModel);
-        BookModel updatedModel = new BookModel(
-                39.99,
-                1,
-                "Updated Book",
-                "Updated Author",
-                "Updated Publisher",
-                "1234567890",
-                15,
-                "Updated Description",
-                "1",
-                "Uploads/updated.jpg",
-                "English",
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        BookModel updatedModel = BookModel.builder()
+                .id(1)
+                .title("Updated Book")
+                .author("Updated Author")
+                .publisher("Updated Publisher")
+                .isbn("1234567890")
+                .quantity(15)
+                .price(39.99)
+                .description("Updated Description")
+                .category("1")
+                .image("Uploads/updated.jpg")
+                .language("English")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
 
         fakeBookDAO.updateBook(updatedModel);
 
@@ -257,21 +257,21 @@ class BookServiceTest {
 
     @Test
     void updateBook_NotFound() throws SQLException {
-        BookModel nonExistentBook = new BookModel(
-                29.99,
-                999,
-                "Non-existent Book",
-                "Unknown Author",
-                "Unknown Publisher",
-                "9999999999",
-                5,
-                "Non-existent Description",
-                "1",
-                "Uploads/nonexistent.jpg",
-                "English",
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        BookModel nonExistentBook = BookModel.builder()
+                .id(999)
+                .title("Non-existent Book")
+                .author("Unknown Author")
+                .publisher("Unknown Publisher")
+                .isbn("9999999999")
+                .quantity(5)
+                .price(29.99)
+                .description("Non-existent Description")
+                .category("1")
+                .image("Uploads/nonexistent.jpg")
+                .language("English")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
 
         SQLException exception = assertThrows(SQLException.class, () -> {
             fakeBookDAO.updateBook(nonExistentBook);
@@ -298,21 +298,21 @@ class BookServiceTest {
     @Test
     void existsByIsbnExcludingId_Found() throws SQLException {
         fakeBookDAO.saveBook(bookModel);
-        BookModel anotherBook = new BookModel(
-                39.99,
-                2,
-                "Another Book",
-                "Another Author",
-                "Another Publisher",
-                "1234567890", // Same ISBN
-                8,
-                "Another Description",
-                "1",
-                "Uploads/another.jpg",
-                "English",
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        );
+        BookModel anotherBook = BookModel.builder()
+                .id(2)
+                .title("Another Book")
+                .author("Another Author")
+                .publisher("Another Publisher")
+                .isbn("1234567890") // Same ISBN
+                .quantity(8)
+                .price(39.99)
+                .description("Another Description")
+                .category("1")
+                .image("Uploads/another.jpg")
+                .language("English")
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
         fakeBookDAO.saveBook(anotherBook);
 
         boolean exists = fakeBookDAO.existsByIsbnExcludingId("1234567890", 1);

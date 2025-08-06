@@ -167,21 +167,20 @@ public class BookDAO {
     }
 
     private BookModel mapResultSetToBook(ResultSet rs) throws SQLException {
-        BookModel book = new BookModel(
-                rs.getDouble("price"),
-                rs.getInt("id"),
-                rs.getString("title"),
-                rs.getString("author"),
-                rs.getString("publisher"),
-                rs.getString("isbn_number"),
-                rs.getInt("quantity"),
-                rs.getString("description"),
-                rs.getString("category_name"), // Use category name instead of ID for display
-                rs.getString("image_path"),
-                rs.getString("language"),
-                rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : LocalDateTime.now(),
-                rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : LocalDateTime.now()
-        );
-        return book;
+        return BookModel.builder()
+                .id(rs.getInt("id"))
+                .title(rs.getString("title"))
+                .author(rs.getString("author"))
+                .publisher(rs.getString("publisher"))
+                .isbn(rs.getString("isbn_number"))
+                .quantity(rs.getInt("quantity"))
+                .price(rs.getDouble("price"))
+                .description(rs.getString("description"))
+                .category(rs.getString("category_name")) // Use category name instead of ID for display
+                .image(rs.getString("image_path"))
+                .language(rs.getString("language"))
+                .createdAt(rs.getTimestamp("created_at") != null ? rs.getTimestamp("created_at").toLocalDateTime() : LocalDateTime.now())
+                .updatedAt(rs.getTimestamp("updated_at") != null ? rs.getTimestamp("updated_at").toLocalDateTime() : LocalDateTime.now())
+                .build();
     }
 }
