@@ -46,13 +46,6 @@ public class UserService {
         // Save user
         UserModel savedUser = userDAO.save(user);
 
-        // Send welcome email asynchronously
-        EmailService.sendWelcomeEmailAsync(
-                savedUser.getEmail(),
-                savedUser.getFirstName(),
-                savedUser.getLastName()
-        );
-
         // Convert to response DTO
         return UserMapper.toResponseDTO(savedUser);
     }

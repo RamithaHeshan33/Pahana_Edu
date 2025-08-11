@@ -48,7 +48,7 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="${pageContext.request.contextPath}/auth/register"
                class="bg-indigo-600 text-white px-8 py-4 rounded-lg hover:bg-indigo-700 transition duration-200 font-medium text-lg">
-                <i class="fas fa-rocket mr-2"></i>Start Learning Today
+                <i class="fas fa-rocket mr-2"></i>Registration
             </a>
             <a href="login.jsp"
                class="border border-indigo-600 text-indigo-600 px-8 py-4 rounded-lg hover:bg-indigo-50 transition duration-200 font-medium text-lg">
