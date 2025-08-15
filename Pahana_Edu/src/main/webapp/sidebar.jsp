@@ -1,3 +1,4 @@
+<title>Pahana Edu</title>
 <%-- Remove the page directive --%>
 <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-sm border-r z-40">
   <div class="flex flex-col h-full">

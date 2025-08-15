@@ -17,7 +17,6 @@ A comprehensive web-based billing and inventory management system designed speci
 - **Order Processing**: Handle sales transactions with cart functionality
 - **Billing System**: Generate receipts and process payments
 - **User Authentication**: Secure admin login system
-- **Email Notifications**: Welcome emails for new administrators
 
 ## 🛠️ Technology Stack
 
@@ -26,7 +25,6 @@ A comprehensive web-based billing and inventory management system designed speci
 - **Jakarta EE** - Web framework
 - **Maven** - Build and dependency management
 - **MySQL** - Database
-- **Jakarta Mail** - Email functionality
 
 ### Frontend
 - **JSP (JavaServer Pages)** - Server-side rendering
@@ -71,7 +69,6 @@ Pahana_Edu/
 │   │   │       │   └── user/    # User DAO and models
 │   │   │       └── util/        # Utility classes
 │   │   ├── resources/
-│   │   │   └── email.properties # Email configuration
 │   │   └── webapp/
 │   │       ├── Admin/           # Admin JSP pages
 │   │       ├── WEB-INF/
@@ -141,28 +138,8 @@ cd Pahana_Edu
    private static final String PASSWORD = "your_mysql_password";
    ```
 
-### 3. Email Configuration (Optional)
 
-If you want to enable email notifications, update the email configuration in:
-`src/main/resources/email.properties`
-
-```properties
-# SMTP Configuration
-smtp.host=smtp.gmail.com
-smtp.port=587
-smtp.auth=true
-smtp.starttls.enable=true
-
-# Email Credentials
-email.username=your-email@gmail.com
-email.password=your-app-password
-
-# From Email Details
-email.from=noreply@pahanaedu.com
-email.from.name=Pahana Edu
-```
-
-### 4. Build the Project
+### 3. Build the Project
 
 ```bash
 # Navigate to project directory
@@ -178,7 +155,7 @@ mvn test
 mvn package
 ```
 
-### 5. Deploy to Tomcat
+### 4. Deploy to Tomcat
 
 1. **Copy WAR file to Tomcat**
    ```bash
@@ -238,7 +215,6 @@ mvn clean package
 1. **Register an Administrator**
    - Navigate to the registration page
    - Create your first admin account
-   - You'll receive a welcome email (if email is configured)
 
 2. **Login**
    - Use your registered credentials to access the admin dashboard
@@ -275,7 +251,6 @@ The project includes comprehensive unit tests for:
 - Service layer components
 - Business logic validation
 - Data access operations
-- Email functionality
 
 ## 🔄 CI/CD Pipeline
 
