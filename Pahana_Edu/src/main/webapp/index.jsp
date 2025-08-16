@@ -27,6 +27,10 @@
                    class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
                     Get Started
                 </a>
+                <a href="https://drive.google.com/file/d/1M7iLaJS0MrFm8bRyfqIRkxQJrCK8-Py_/view?usp=sharing" target="_blank"
+                   class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
+                    Help
+                </a>
             </div>
         </div>
     </div>
