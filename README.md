@@ -5,7 +5,7 @@
 [![Frontend Validation Report](https://img.shields.io/badge/Frontend%20Validation%20Report-📊%20Report-green)](https://github.com/RamithaHeshan33/Pahana_Edu/actions/runs/17009202134/artifacts/3779849795)
 [![Backend Dependency Report](https://img.shields.io/badge/Backend%20Dependency%20Check%20Report-📊%20Report-green)](https://github.com/RamithaHeshan33/Pahana_Edu/actions/runs/17009202144/artifacts/3779910840)
 [![Test Report](https://img.shields.io/badge/Test%20Report-✅%20Results-brightgreen)](https://github.com/RamithaHeshan33/Pahana_Edu/actions/runs/17009202144/job/48222942735)
-[![Pull Requests](https://img.shields.io/github/issues-pr-closed/RamithaHeshan33/Pahana_Edu?color=blue&label=Closed%20PRs)](https://github.com/RamithaHeshan33/Pahana_Edu/pulls?q=is%3Apr+is%3Aclosed)
+[![Closed Pull Requests](https://img.shields.io/github/issues-pr-closed/RamithaHeshan33/Pahana_Edu?color=blue&label=Closed%20PRs)](https://github.com/RamithaHeshan33/Pahana_Edu/pulls?q=is%3Apr+is%3Aclosed)
 [![Frontend CI](https://github.com/RamithaHeshan33/Pahana_Edu/actions/workflows/frontend.yml/badge.svg)](https://github.com/RamithaHeshan33/Pahana_Edu/actions/workflows/frontend.yml)
 [![Backend CI](https://github.com/RamithaHeshan33/Pahana_Edu/actions/workflows/backend.yml/badge.svg)](https://github.com/RamithaHeshan33/Pahana_Edu/actions/workflows/backend.yml)
 
